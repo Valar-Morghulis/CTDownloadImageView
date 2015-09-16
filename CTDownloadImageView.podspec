@@ -48,7 +48,7 @@ s.source_files = 'CTDownloadImageView/*.{h,m}'
   # s.framework  = "SomeFramework"
   #s.frameworks = "Foundation", "UIKit"
   s.dependency     'CTWebService'
-
+  s.dependency     'CTUtility'
 
   s.requires_arc = false
 

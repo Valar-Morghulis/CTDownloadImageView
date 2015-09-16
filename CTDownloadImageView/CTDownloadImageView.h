@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "CTWebService.h"
+#import "CTUtility.h"
 
 extern NSString * DEFAULT_EMPTY_IMAGE;//默认图片
 extern UIColor * DEFAULT_BACKGROUNDCOLOR;//默认背景

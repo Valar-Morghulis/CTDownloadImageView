@@ -113,9 +113,19 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
 {
     [self cancelLoad];
     NSLog(@"image URL=%@",imageUrl);
-    [self jobsBeforeStart];
     self._url = imageUrl;
-    [self._webService startWithUrl:imageUrl];
+    NSString *md5Imagename = [CTUtility MD5Encode:imageUrl];
+    UIImage * image = [CTUtility getCacheImageWithImageName:md5Imagename];
+    if (image)
+    {
+        [self setImage:image];
+    }
+    else
+    {
+        [self jobsBeforeStart];
+        [self._webService startWithUrl:imageUrl];
+    }
+
 }
 
 -(void)jobsBeforeStart
@@ -138,12 +148,15 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
 {
     if(engine._lastExecutionResult == Result_Succeed)
     {
-        UIImage *img = [UIImage imageWithData:engine.data];
+        UIImage *image = [UIImage imageWithData:engine.data];
+        [self setImage:image];
+        NSString *imagename = [CTUtility MD5Encode:self._url];
+        [CTUtility cacheImageWithName:imagename image:image];
+        
         if (self._delegate)
         {
-            [self._delegate afterDownImageViewSucceed:self image:img url:self._url];
+            [self._delegate afterDownImageViewSucceed:self image:image url:self._url];
         }
-        [self setImage:img];
     }
     else if(engine._lastExecutionResult == Result_Error)
     {

@@ -88,8 +88,11 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
 }
 -(void)cancelLoad
 {
-    [self._webService cancelLoading];
-    [self jobsAfterDone];
+    if([self._webService isWorking])
+    {
+        [self._webService cancelLoading];
+        [self jobsAfterDone];
+    }
 }
 -(void)setImage:(UIImage *)img
 {
@@ -116,7 +119,6 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
 {
     [self cancelLoad];
     NSLog(@"image URL=%@",imageUrl);
-    self._url = imageUrl;
     NSString *md5Imagename = [CTUtility MD5Encode:imageUrl];
     UIImage * image = [CTUtility getCacheImageWithImageName:md5Imagename];
     if (image)
@@ -126,7 +128,8 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
     else
     {
         [self jobsBeforeStart];
-        [self._webService startWithUrl:imageUrl];
+        self._url = imageUrl;
+        [self._webService startWithUrl:self._url];
     }
 
 }

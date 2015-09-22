@@ -152,7 +152,6 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
     if(engine._lastExecutionResult == Result_Succeed)
     {
         UIImage *image = [UIImage imageWithData:engine.data];
-        [self setImage:image];
         NSString *imagename = [CTUtility MD5Encode:self._url];
         [CTUtility cacheImageWithName:imagename image:image];
         
@@ -160,6 +159,7 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
         {
             [self._delegate afterDownImageViewSucceed:self image:image url:self._url];
         }
+        [self setImage:image];
     }
     else if(engine._lastExecutionResult == Result_Error)
     {

@@ -37,7 +37,7 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
 		self._imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)] autorelease];
 		[self addSubview:self._imageView];
         [self setBackgroundColor:DEFAULT_BACKGROUNDCOLOR];
-        self._imageView.autoresizingMask =  UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin;
+        self._imageView.autoresizingMask =  UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
      
         [self setImage:self._emptyImage];
         

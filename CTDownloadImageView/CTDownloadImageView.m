@@ -119,6 +119,11 @@ UIColor * DEFAULT_BACKGROUNDCOLOR;
 {
     [self cancelLoad];
     NSLog(@"image URL=%@",imageUrl);
+    if(!imageUrl)
+    {
+        [self setImage:self._defaultImage];
+        return;
+    }
     NSString *md5Imagename = [CTUtility MD5Encode:imageUrl];
     UIImage * image = [CTUtility getCacheImageWithImageName:md5Imagename];
     if (image)
